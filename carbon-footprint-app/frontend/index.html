@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Carbon Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Side Navigation Menu -->
+  <nav id="side-menu" class="side-menu">
+    <div class="menu-header">
+      <h2>Carbon Tracker</h2>
+    </div>
+    <ul>
+      <li><a href="#" class="nav-link active" data-view="dashboard-view">Dashboard</a></li>
+      <li><a href="#" class="nav-link" data-view="analysis-view">Analysis</a></li>
+      <li><a href="#" class="nav-link" data-view="chatbot-view">Eco Assistant</a></li>
+      <li><a href="#" class="nav-link" data-view="profile-view">Profile</a></li>
+    </ul>
+  </nav>
+  <div id="menu-overlay" class="menu-overlay"></div>
+
+  <!-- Main App -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <button id="menu-button" class="menu-button">
+        <!-- menu icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <h1 id="app-title" class="app-title">Dashboard</h1>
+      <div class="profile-container">
+        <button id="profile-button" class="profile-button">
+          <!-- profile icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <div id="profile-dropdown" class="profile-dropdown">
+          <div class="dropdown-header">
+            <p>Signed in as</p>
+            <strong id="user-email-display">loading...</strong>
+          </div>
+          <div class="dropdown-item theme-switcher">
+            <span>Dark Mode</span>
+            <label class="theme-switch">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <button id="logout-button" class="dropdown-item logout">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+
+      <!-- View 1: Dashboard -->
+      <div id="dashboard-view" class="view active">
+        <section class="dashboard">
+          <div class="stat-card">
+            <p class="stat-title">Total Emissions</p>
+            <h3 id="total-emissions" class="stat-value">0 kg CO₂</h3>
+          </div>
+          <div class="stat-card">
+            <p class="stat-title">Top Activity</p>
+            <h3 id="top-activity" class="stat-value">-</h3>
+          </div>
+        </section>
+
+        <!-- AI Recommendation Card -->
+        <div class="card recommendation-card">
+          <div class="card-header">
+            <h2>Eco Tip of the Day</h2>
+          </div>
+          <div class="card-content">
+            <p id="ai-recommendation-text">Loading your personalized tip...</p>
+          </div>
+        </div>
+
+        <!-- Log Activity -->
+        <div class="card">
+          <div class="card-header"><h2>Log New Activity</h2></div>
+          <div class="card-content">
+            <form id="activity-form">
+              <div class="form-group">
+                <label for="activity-type">Activity</label>
+                <select id="activity-type" required>
+                  <option value="" disabled selected>Select an Activity Type</option>
+                  <option value="car_petrol">Petrol Car Travel</option>
+                  <option value="flight_short">Short-haul Flight</option>
+                  <option value="electricity">Electricity Usage</option>
+                  <option value="beef">Beef Consumption</option>
+                  <option value="chicken">Chicken Consumption</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <div class="input-with-unit">
+                  <input type="number" id="amount" placeholder="e.g., 10" required min="0" step="0.1">
+                  <span id="unit-display">km</span>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary">Add to Log</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div class="logs-container">
+          <h2>History</h2>
+          <ul id="activity-list"></ul>
+        </div>
+      </div>
+
+      <!-- View 2: Analysis -->
+      <div id="analysis-view" class="view">
+        <div class="card">
+          <div class="card-header"><h2>Emissions Breakdown</h2></div>
+          <div class="card-content">
+            <canvas id="emissions-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 3: Eco Assistant (Chatbot) -->
+      <div id="chatbot-view" class="view">
+        <div class="card chatbot-card">
+          <div class="card-header"><h2>Eco Assistant</h2></div>
+          <div class="card-content chatbot-container">
+            <div id="chat-window" class="chat-window">
+              <div class="chat-message bot-message">
+                <p>Hi! I'm Eco 🌱, your sustainability assistant. Ask me anything about reducing your carbon footprint!</p>
+              </div>
+            </div>
+            <form id="chat-form" class="chat-input-form">
+              <input type="text" id="chat-input" placeholder="Ask about sustainability..." required>
+              <button type="submit" class="btn-primary">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 4: Profile -->
+      <div id="profile-view" class="view">
+        <div class="card">
+          <div class="card-header"><h2>Profile</h2></div>
+          <div class="card-content">
+            <p>Email: <span id="profile-email"></span></p>
+            <p>More profile details coming soon...</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

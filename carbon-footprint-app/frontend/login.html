@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Login - Carbon Tracker</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Dark Mode Toggle -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <main class="app-main">
+            <!-- Step 1: Email Input -->
+            <div id="email-step" class="login-step active">
+                <div class="login-header">
+                    <h1>Welcome Back</h1>
+                    <p>Enter your email to receive a login code.</p>
+                </div>
+                <form id="email-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Code</button>
+                </form>
+            </div>
+
+            <!-- Step 2: OTP Verification -->
+            <div id="otp-step" class="login-step">
+                <div class="login-header">
+                    <h1>Check your email</h1>
+                    <p>We've sent a 6-digit code to <b id="user-email-display"></b>.</p>
+                </div>
+                <form id="otp-form">
+                    <div class="form-group">
+                        <label for="otp">Verification Code</label>
+                        <input type="text" id="otp" placeholder="______" required maxlength="6" pattern="\d{6}">
+                    </div>
+                    <button type="submit" class="btn-primary">Verify & Login</button>
+                    <button type="button" id="back-to-email" class="btn-secondary">Go Back</button>
+                </form>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="spinner-overlay" style="display: none;">
+                <div class="spinner"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
