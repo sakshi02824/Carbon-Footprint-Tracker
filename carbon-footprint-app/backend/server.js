@@ -91,7 +91,7 @@ app.post('/auth/login', async (req, res) => {
 
         // Send the OTP email
         await transporter.sendMail({
-            from: '"Carbon Tracker" <satyamku88@gmail.com>',
+            from: '"Carbon Tracker" <sakshichaudhary6498@gmail.com>',
             to: email,
             subject: 'Your Login Code for Carbon Tracker',
             html: `<p>Your One-Time Password is: <b>${otp}</b></p><p>It will expire in ${OTP_EXPIRY_MINUTES} minutes.</p>`,
