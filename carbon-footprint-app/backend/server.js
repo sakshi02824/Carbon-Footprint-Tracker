@@ -247,8 +247,27 @@ app.post('/api/chatbot', authenticateToken, (req, res) => {
 
 
 // --- Database Seeding (No changes here) ---
+// --- Database Seeding ---
 async function seedDatabase() {
-    // ... (keep the existing seedDatabase function as is)
+    try {
+        const factorsCollection = db.collection('emissionFactors');
+        const count = await factorsCollection.countDocuments();
+
+        // Only add data if the collection is empty
+        if (count === 0) {
+            console.log('🌱 No emission factors found. Seeding database...');
+            await factorsCollection.insertMany([
+                { name: 'car_petrol', factor: 2.31, unit: 'kg CO₂/km' },
+                { name: 'flight_short', factor: 0.25, unit: 'kg CO₂/km' },
+                { name: 'electricity', factor: 0.82, unit: 'kg CO₂/kWh' },
+                { name: 'beef', factor: 27.0, unit: 'kg CO₂/kg' },
+                { name: 'chicken', factor: 6.9, unit: 'kg CO₂/kg' }
+            ]);
+            console.log('✅ Database seeded with emission factors.');
+        }
+    } catch (err) {
+        console.error('Error during database seeding:', err);
+    }
 }
 
 // --- Start the Server ---
