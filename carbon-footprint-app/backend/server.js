@@ -40,8 +40,8 @@ async function connectDB() {
 const transporter = nodemailer.createTransport({
     service: 'gmail', // Or another email service
     auth: {
-        user: 'satyamku88@gmail.com', // 👈 YOUR GMAIL
-        pass: 'dkrh lbds pofk xocz',   // 👈 YOUR 16-DIGIT APP PASSWORD
+        user: 'sakshichaudhary6498@gmail.com', // 👈 YOUR GMAIL
+        pass: 'ozzj bqjg zwof ppmn',   // 👈 YOUR 16-DIGIT APP PASSWORD
     },
 });
 
